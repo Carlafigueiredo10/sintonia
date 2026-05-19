@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Entrar — Sintonia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky-top: #e8c9a8;
+    --sky-high: #d4a589;
+    --sky-mid: #9a7670;
+    --sky-low: #4a4558;
+    --sky-base: #22243a;
+    --ink: #15162a;
+    --ink-soft: #2a2c45;
+    --cream: #faf0dc;
+    --cream-dim: #e0d2ba;
+    --accent: #7a2a1a;
+    --accent-bright: #c4654a;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 300;
+    line-height: 1.5;
+    background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-mid) 60%, var(--sky-base) 100%);
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .card {
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .mark {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.35rem;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+  }
+
+  .mark::after {
+    content: " ·";
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+  }
+
+  .sub {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+  }
+
+  .google-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 1.1rem 1.8rem;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .google-btn:hover:not(:disabled) {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .google-btn:disabled {
+    opacity: 0.5;
+    cursor: progress;
+  }
+
+  .google-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .footnote {
+    margin-top: 2.5rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0.7;
+  }
+
+  .footnote a {
+    color: inherit;
+    border-bottom: 1px solid rgba(21, 22, 42, 0.25);
+    text-decoration: none;
+    padding-bottom: 1px;
+  }
+
+  .footnote a:hover { color: var(--accent); }
+
+  .error {
+    display: none;
+    margin-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+  }
+
+  .error.visible { display: block; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="mark">Sintonia</div>
+    <h1>Bem-vinda <em>de volta</em>.</h1>
+    <p class="sub">Acesso restrito ao time. Entre com sua conta Google.</p>
+
+    <button class="google-btn" id="googleBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A10.99 10.99 0 0 0 12 23z" fill="#34A853"/>
+        <path d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.07H2.18A10.99 10.99 0 0 0 1 12c0 1.77.43 3.45 1.18 4.93l3.66-2.83z" fill="#FBBC05"/>
+        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.83C6.71 7.31 9.14 5.38 12 5.38z" fill="#EA4335"/>
+      </svg>
+      <span id="googleBtnLabel">Entrar com Google</span>
+    </button>
+
+    <div class="error" id="errorMsg" role="alert"></div>
+
+    <div class="footnote">
+      <a href="index.html">← voltar para a home</a>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.4';
+
+    const SUPABASE_URL = 'https://rwdiujiuryiwqfsviitf.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_9JmoCSyrmfCqLB_ThbfWFQ_GGu3EuDe';
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const btn = document.getElementById('googleBtn');
+    const btnLabel = document.getElementById('googleBtnLabel');
+    const errorEl = document.getElementById('errorMsg');
+
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      window.location.replace('interessadas.html');
+    }
+
+    btn.addEventListener('click', async () => {
+      errorEl.classList.remove('visible');
+      btn.disabled = true;
+      btnLabel.textContent = 'Abrindo Google…';
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/interessadas.html`,
+        },
+      });
+      if (error) {
+        console.error('OAuth error', error);
+        errorEl.textContent = 'Falha ao abrir login. Tenta de novo.';
+        errorEl.classList.add('visible');
+        btn.disabled = false;
+        btnLabel.textContent = 'Entrar com Google';
+      }
+    });
+  </script>
+</body>
+</html>

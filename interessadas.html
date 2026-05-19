@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Interessadas — Sintonia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky-top: #e8c9a8;
+    --sky-mid: #9a7670;
+    --sky-base: #22243a;
+    --ink: #15162a;
+    --ink-soft: #2a2c45;
+    --ink-mute: #4a4d68;
+    --cream: #faf0dc;
+    --cream-dim: #e0d2ba;
+    --line: rgba(21, 22, 42, 0.18);
+    --line-soft: rgba(21, 22, 42, 0.08);
+    --accent: #7a2a1a;
+    --accent-bright: #c4654a;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.5;
+    background: var(--cream);
+  }
+
+  .topbar {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--line);
+    background: var(--cream);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .topbar-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .mark {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .mark::after {
+    content: " ·";
+    color: var(--accent);
+  }
+
+  .userbar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .userbar button {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .userbar button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  main {
+    padding: 3rem 0 5rem;
+  }
+
+  .pagehead {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .pagehead h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .pagehead h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+  }
+
+  .pagehead .meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  .pagehead .meta strong { color: var(--accent); font-weight: 600; }
+
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .actions input[type="search"] {
+    flex: 1;
+    min-width: 220px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 0.6rem 0;
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--ink);
+    outline: none;
+  }
+
+  .actions input[type="search"]:focus { border-color: var(--accent); }
+  .actions input[type="search"]::placeholder { color: var(--ink-mute); font-style: italic; }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: rgba(255,255,255,0.35);
+  }
+
+  th, td {
+    text-align: left;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: top;
+  }
+
+  th {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    background: rgba(255,255,255,0.5);
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  td {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  td.nome { font-weight: 500; }
+  td.email { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); }
+  td.tel   { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); }
+  td.data  { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-mute); white-space: nowrap; }
+  td.interesse { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.45; max-width: 360px; }
+
+  .empty {
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--ink-mute);
+    font-style: italic;
+    font-size: 1.05rem;
+  }
+
+  .gate-msg {
+    padding: 4rem 0;
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .gate-msg h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .gate-msg p {
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+  }
+
+  .gate-msg a {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  .skeleton {
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 720px) {
+    .pagehead { align-items: flex-start; }
+    table { font-size: 0.85rem; }
+    td.interesse { max-width: none; }
+    th.col-tel, td.tel { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-grid">
+      <a href="index.html" class="mark">Sintonia</a>
+      <div class="userbar">
+        <span id="userEmail">…</span>
+        <button id="logoutBtn" type="button">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="loading" class="skeleton">Carregando…</div>
+
+    <div id="gate" class="gate-msg" style="display:none;">
+      <h2>Acesso restrito.</h2>
+      <p id="gateText">Esse email não está autorizado a ver a lista.</p>
+      <a href="entrar.html">← entrar com outra conta</a>
+    </div>
+
+    <div id="panel" style="display:none;">
+      <div class="pagehead">
+        <h1>Interessadas <em>·</em></h1>
+        <div class="meta">Total: <strong id="count">0</strong> · ordenadas por data</div>
+      </div>
+
+      <div class="actions">
+        <input type="search" id="filter" placeholder="filtrar por nome, email ou interesse…">
+        <button class="btn-secondary" id="exportBtn" type="button">Exportar CSV ↓</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Quando</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th class="col-tel">WhatsApp</th>
+            <th>Interesse</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+
+      <div id="empty" class="empty" style="display:none;">Nenhuma inscrição ainda.</div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.4';
+
+    const SUPABASE_URL = 'https://rwdiujiuryiwqfsviitf.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_9JmoCSyrmfCqLB_ThbfWFQ_GGu3EuDe';
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const loadingEl = document.getElementById('loading');
+    const gateEl = document.getElementById('gate');
+    const gateText = document.getElementById('gateText');
+    const panelEl = document.getElementById('panel');
+    const userEmailEl = document.getElementById('userEmail');
+    const rowsEl = document.getElementById('rows');
+    const countEl = document.getElementById('count');
+    const emptyEl = document.getElementById('empty');
+    const filterEl = document.getElementById('filter');
+    const exportBtn = document.getElementById('exportBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    let allRows = [];
+
+    function fmtDate(iso) {
+      try {
+        const d = new Date(iso);
+        return d.toLocaleString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      } catch { return iso; }
+    }
+
+    function escapeHtml(s) {
+      return (s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function render(rows) {
+      countEl.textContent = rows.length;
+      if (rows.length === 0) {
+        rowsEl.innerHTML = '';
+        emptyEl.style.display = 'block';
+        return;
+      }
+      emptyEl.style.display = 'none';
+      rowsEl.innerHTML = rows.map(r => `
+        <tr>
+          <td class="data">${escapeHtml(fmtDate(r.created_at))}</td>
+          <td class="nome">${escapeHtml(r.nome)}</td>
+          <td class="email">${escapeHtml(r.email)}</td>
+          <td class="tel">${escapeHtml(r.telefone || '—')}</td>
+          <td class="interesse">${escapeHtml(r.interesse || '—')}</td>
+        </tr>
+      `).join('');
+    }
+
+    function applyFilter() {
+      const q = filterEl.value.trim().toLowerCase();
+      if (!q) { render(allRows); return; }
+      const filtered = allRows.filter(r =>
+        (r.nome || '').toLowerCase().includes(q) ||
+        (r.email || '').toLowerCase().includes(q) ||
+        (r.interesse || '').toLowerCase().includes(q)
+      );
+      render(filtered);
+    }
+
+    function toCSV(rows) {
+      const header = ['created_at','nome','email','telefone','interesse','source'];
+      const esc = v => {
+        if (v == null) return '';
+        const s = String(v);
+        return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+      };
+      const lines = [header.join(',')];
+      for (const r of rows) lines.push(header.map(h => esc(r[h])).join(','));
+      return lines.join('\n');
+    }
+
+    function downloadCSV() {
+      const csv = toCSV(allRows);
+      const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      const stamp = new Date().toISOString().slice(0, 10);
+      a.download = `sintonia-interessadas-${stamp}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    async function loadList(userEmail) {
+      const { data, error } = await supabase
+        .from('sintonia_waitlist')
+        .select('id, created_at, nome, email, telefone, interesse, source')
+        .order('created_at', { ascending: false });
+
+      loadingEl.style.display = 'none';
+
+      if (error) {
+        console.error('Select error', error);
+        gateText.textContent = `Esse email (${userEmail}) não está autorizado a ver a lista. Avisa a Carla pra incluir.`;
+        gateEl.style.display = 'block';
+        return;
+      }
+
+      panelEl.style.display = 'block';
+      allRows = data || [];
+      render(allRows);
+    }
+
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      window.location.replace('entrar.html');
+    } else {
+      userEmailEl.textContent = session.user.email;
+      filterEl.addEventListener('input', applyFilter);
+      exportBtn.addEventListener('click', downloadCSV);
+      logoutBtn.addEventListener('click', async () => {
+        await supabase.auth.signOut();
+        window.location.replace('entrar.html');
+      });
+      await loadList(session.user.email);
+    }
+  </script>
+</body>
+</html>
