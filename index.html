@@ -555,6 +555,124 @@
     font-weight: 400;
   }
 
+  /* ======= CONVERGÊNCIA — CÉU 2026 ======= */
+  .convergence {
+    padding: 7rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .convergence-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: baseline;
+    margin-bottom: 3rem;
+  }
+
+  .convergence-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+
+  .convergence-title em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  .convergence-intro {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0 0 4rem auto;
+  }
+
+  .convergence-intro em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  .convergence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.75rem;
+    margin-bottom: 4.5rem;
+  }
+
+  .tradition {
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .tradition-symbol {
+    font-family: var(--serif);
+    font-size: 2.25rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 1.25rem;
+  }
+
+  .tradition-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.75rem;
+  }
+
+  .tradition-name {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .tradition-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .tradition-body {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .convergence-coda {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    text-align: center;
+    max-width: 52ch;
+    margin: 0 auto;
+  }
+
+  .convergence-coda em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
   /* ======= REALITY (CONCRETIZAÇÃO) ======= */
   .reality {
     padding: 6rem 0;
@@ -1177,6 +1295,10 @@
     .what-is-left { position: static; }
     .what-is-right { padding-top: 0; }
     .step { grid-template-columns: 1fr; gap: 0.5rem; }
+    .convergence { padding: 4rem 0; }
+    .convergence-header { grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2rem; }
+    .convergence-intro { margin: 0 0 2.5rem; }
+    .convergence-grid { grid-template-columns: 1fr; gap: 2.25rem; margin-bottom: 3rem; }
     .reality { padding: 4rem 0; }
     .reality-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .reality-header { position: static; }
@@ -1364,6 +1486,43 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ======= CONVERGÊNCIA — CÉU 2026 ======= -->
+<section class="convergence">
+  <div class="container">
+    <div class="convergence-header">
+      <div class="section-label">Não é qualquer ano</div>
+      <div class="convergence-title">O céu de <em>2026</em><br>não vai se repetir tão cedo.</div>
+    </div>
+
+    <p class="convergence-intro">Há anos em que o céu apenas passa. E há anos em que ele <em>converge</em> — quando tradições diferentes, de continentes diferentes, apontam para o mesmo ponto.</p>
+
+    <div class="convergence-grid">
+      <article class="tradition">
+        <div class="tradition-symbol">✦</div>
+        <div class="tradition-label">Numerologia</div>
+        <h3 class="tradition-name">Ano <em>1</em></h3>
+        <p class="tradition-body">O número da semente — do começo que não volta atrás. Novos ciclos, novas alianças, novos encontros que ficam.</p>
+      </article>
+
+      <article class="tradition">
+        <div class="tradition-symbol">△</div>
+        <div class="tradition-label">Astrologia Chinesa</div>
+        <h3 class="tradition-name">Cavalo de <em>Fogo Yang</em></h3>
+        <p class="tradition-body">O signo mais vibrante e social do zodíaco oriental — em sua versão mais potente. Energia de novos encontros e expansão das relações.</p>
+      </article>
+
+      <article class="tradition">
+        <div class="tradition-symbol">☉</div>
+        <div class="tradition-label">Astrologia Ocidental</div>
+        <h3 class="tradition-name">Fogo e <em>Ar dominantes</em></h3>
+        <p class="tradition-body">Lunações em signos que favorecem conexão e início de vínculos. Vênus em Touro abre o semestre com sensorialidade e presença.</p>
+      </article>
+    </div>
+
+    <p class="convergence-coda">Quando o céu fala assim — com tantas vozes, ao mesmo tempo — a gente <em>escuta</em>.</p>
   </div>
 </section>
 
