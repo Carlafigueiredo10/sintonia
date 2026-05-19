@@ -950,41 +950,82 @@
     font-size: 1.15rem;
     line-height: 1.55;
     color: var(--cream-dim);
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     max-width: 48ch;
     margin-left: auto;
     margin-right: auto;
   }
 
-  form {
-    display: flex;
-    gap: 0;
-    max-width: 520px;
-    margin: 0 auto;
-    border-bottom: 1px solid var(--cream);
-    transition: border-color 0.3s ease;
+  .waitlist-offer {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--cream-mute);
+    margin: 0 auto 3rem;
+    padding: 1.25rem 1.5rem;
+    max-width: 46ch;
+    border-top: 1px solid rgba(250, 240, 220, 0.15);
+    border-bottom: 1px solid rgba(250, 240, 220, 0.15);
   }
 
-  form:focus-within {
+  .waitlist-offer em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--cream);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .field {
+    border-bottom: 1px solid var(--cream);
+    transition: border-color 0.3s ease;
+    padding: 0.25rem 0;
+  }
+
+  .field:focus-within {
     border-color: var(--sky-top);
   }
 
-  input[type="email"] {
-    flex: 1;
+  .field input,
+  .field textarea {
+    width: 100%;
     background: transparent;
     border: none;
-    padding: 1rem 0;
+    padding: 0.85rem 0;
     font-family: var(--serif);
     font-size: 1.1rem;
     font-weight: 400;
     color: var(--cream);
     outline: none;
     font-style: italic;
+    resize: none;
   }
 
-  input[type="email"]::placeholder {
+  .field textarea {
+    min-height: 3.5rem;
+    line-height: 1.4;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
     color: rgba(250, 240, 220, 0.55);
     font-style: italic;
+  }
+
+  .form-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 1.5rem;
   }
 
   button {
@@ -996,24 +1037,43 @@
     font-weight: 500;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    padding: 1rem 0 1rem 1.5rem;
+    padding: 0.75rem 0;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
   }
 
-  button:hover {
+  button:hover:not(:disabled) {
     color: var(--cream);
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: progress;
   }
 
   button .arrow {
     transition: transform 0.3s ease;
   }
 
-  button:hover .arrow {
+  button:hover:not(:disabled) .arrow {
     transform: translateX(6px);
+  }
+
+  .error-msg {
+    display: none;
+    margin-top: 1.25rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--accent-bright);
+    text-align: center;
+  }
+
+  .error-msg.visible {
+    display: block;
   }
 
   .waitlist-note {
@@ -1173,7 +1233,7 @@
           <a href="calendario.html" class="cta-secondary">Ver calendário ↗</a>
         </div>
 
-        <p class="hero-proof">Brasília<span>·</span>Grupos de 6 a 8<span>·</span>Primeira temporada</p>
+        <p class="hero-proof">Brasília<span>·</span>Grupos de até 6<span>·</span>Primeira temporada</p>
       </div>
 
       <div class="celestial">
@@ -1324,7 +1384,7 @@
         </div>
         <div class="fact">
           <div class="fact-label">Por encontro</div>
-          <div class="fact-value"><em>6 a 8</em> pessoas</div>
+          <div class="fact-value">Até <em>6</em> pessoas</div>
         </div>
         <div class="fact">
           <div class="fact-label">Duração</div>
@@ -1434,18 +1494,42 @@
       <h2>Seja avisada<br>quando o <em>primeiro</em><br>encontro chegar.</h2>
       <p class="waitlist-sub">Se você quer participar do primeiro encontro em Brasília, deixe seu e-mail. Convites enviados em ordem de inscrição.</p>
 
-      <form id="waitlistForm" onsubmit="handleSubmit(event)">
-        <label for="email-input" class="visually-hidden">Seu e-mail</label>
-        <input id="email-input" type="email" placeholder="seu endereço de e-mail" required aria-label="Seu e-mail">
-        <button type="submit" aria-label="Entrar na lista de espera">
-          Entrar na lista
-          <span class="arrow">→</span>
-        </button>
+      <p class="waitlist-offer">Na primeira temporada, o valor é uma <em>avaliação</em> — você participa e responde um questionário depois. Seu olhar ajuda a construir o que vem.</p>
+
+      <form id="waitlistForm" onsubmit="handleSubmit(event)" novalidate>
+        <div class="field">
+          <label for="nome-input" class="visually-hidden">Seu nome</label>
+          <input id="nome-input" name="nome" type="text" placeholder="seu nome" required autocomplete="name" maxlength="120" aria-label="Seu nome">
+        </div>
+
+        <div class="field">
+          <label for="email-input" class="visually-hidden">Seu e-mail</label>
+          <input id="email-input" name="email" type="email" placeholder="seu endereço de e-mail" required autocomplete="email" aria-label="Seu e-mail">
+        </div>
+
+        <div class="field">
+          <label for="telefone-input" class="visually-hidden">WhatsApp (opcional)</label>
+          <input id="telefone-input" name="telefone" type="tel" placeholder="WhatsApp (opcional)" autocomplete="tel" maxlength="40" aria-label="WhatsApp opcional">
+        </div>
+
+        <div class="field">
+          <label for="interesse-input" class="visually-hidden">O que te traria pra essa mesa?</label>
+          <textarea id="interesse-input" name="interesse" rows="2" maxlength="2000" placeholder="o que te traria pra essa mesa? (opcional)" aria-label="O que te traria pra essa mesa"></textarea>
+        </div>
+
+        <div class="form-row">
+          <button type="submit" aria-label="Entrar na lista de espera">
+            Entrar na lista
+            <span class="arrow">→</span>
+          </button>
+        </div>
       </form>
 
       <div class="waitlist-note">Você receberá apenas o convite — nada além disso.</div>
 
-      <div class="success-msg" id="successMsg">
+      <div class="error-msg" id="errorMsg" role="alert" aria-live="polite"></div>
+
+      <div class="success-msg" id="successMsg" aria-live="polite">
         Recebemos. Você será avisada quando o céu e o espaço estiverem prontos.
       </div>
     </div>
@@ -1463,12 +1547,80 @@
 </footer>
 
 <script>
-  function handleSubmit(e) {
+  const SUPABASE_URL = 'https://rwdiujiuryiwqfsviitf.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_9JmoCSyrmfCqLB_ThbfWFQ_GGu3EuDe';
+
+  async function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
-    const msg = document.getElementById('successMsg');
-    form.style.display = 'none';
-    msg.classList.add('visible');
+    const btn = form.querySelector('button[type=submit]');
+    const errorEl = document.getElementById('errorMsg');
+    const successEl = document.getElementById('successMsg');
+
+    errorEl.classList.remove('visible');
+    errorEl.textContent = '';
+
+    const nome = form.nome.value.trim();
+    const email = form.email.value.trim().toLowerCase();
+    const telefone = form.telefone.value.trim();
+    const interesse = form.interesse.value.trim();
+
+    if (!nome || !email) {
+      errorEl.textContent = 'Preenche nome e e-mail, por favor.';
+      errorEl.classList.add('visible');
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      errorEl.textContent = 'Esse e-mail parece estranho. Confere?';
+      errorEl.classList.add('visible');
+      return;
+    }
+
+    const originalLabel = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = 'Enviando…';
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/sintonia_waitlist`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify({
+          nome,
+          email,
+          telefone: telefone || null,
+          interesse: interesse || null,
+          source: 'landing',
+          user_agent: navigator.userAgent.slice(0, 500),
+        }),
+      });
+
+      if (res.ok) {
+        form.style.display = 'none';
+        successEl.classList.add('visible');
+        return;
+      }
+
+      if (res.status === 409) {
+        errorEl.textContent = 'Você já está na nossa lista. Obrigada!';
+      } else {
+        const detail = await res.text().catch(() => '');
+        console.error('Waitlist insert failed', res.status, detail);
+        errorEl.textContent = 'Algo não saiu certo. Tenta de novo em um instante?';
+      }
+      errorEl.classList.add('visible');
+    } catch (err) {
+      console.error('Waitlist network error', err);
+      errorEl.textContent = 'Sem conexão. Confere seu wifi e tenta de novo?';
+      errorEl.classList.add('visible');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = originalLabel;
+    }
   }
 </script>
 
