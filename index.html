@@ -673,6 +673,62 @@
     color: var(--accent);
   }
 
+  /* ======= SEU SIGNO EM SINTONIA ======= */
+  .signs-bridge {
+    padding: 6rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .signs-bridge-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .signs-bridge-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-top: 1.25rem;
+  }
+
+  .signs-bridge-title em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+    font-variation-settings: "SOFT" 100;
+  }
+
+  .signs-bridge-body {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+    max-width: 54ch;
+  }
+
+  .signs-bridge-body em {
+    font-style: italic;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .signs-bridge-zodiac {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-bottom: 2.5rem;
+    font-size: 1.5rem;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+  }
+
   /* ======= REALITY (CONCRETIZAÇÃO) ======= */
   .reality {
     padding: 6rem 0;
@@ -1299,6 +1355,9 @@
     .convergence-header { grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2rem; }
     .convergence-intro { margin: 0 0 2.5rem; }
     .convergence-grid { grid-template-columns: 1fr; gap: 2.25rem; margin-bottom: 3rem; }
+    .signs-bridge { padding: 4rem 0; }
+    .signs-bridge-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .signs-bridge-zodiac { font-size: 1.3rem; gap: 0.7rem; }
     .reality { padding: 4rem 0; }
     .reality-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .reality-header { position: static; }
@@ -1332,7 +1391,7 @@
     <div class="header-grid">
       <div class="meta">Brasília · DF</div>
       <div class="mark">Sintonia</div>
-      <div class="meta meta-right"><a href="calendario.html">Calendário</a> &nbsp;·&nbsp; <a href="restaurantes.html">Restaurantes</a></div>
+      <div class="meta meta-right"><a href="2026.html">2026</a> &nbsp;·&nbsp; <a href="calendario.html">Calendário</a> &nbsp;·&nbsp; <a href="restaurantes.html">Restaurantes</a></div>
     </div>
   </div>
 </header>
@@ -1352,6 +1411,7 @@
             <span class="arrow">→</span>
           </a>
           <a href="#como-funciona" class="cta-secondary">Como funciona ↓</a>
+          <a href="2026.html" class="cta-secondary">Seu 2026 ↗</a>
           <a href="calendario.html" class="cta-secondary">Calendário ↗</a>
           <a href="restaurantes.html" class="cta-secondary">Restaurantes ↗</a>
         </div>
@@ -1524,6 +1584,28 @@
     </div>
 
     <p class="convergence-coda">Quando o céu fala assim — com tantas vozes, ao mesmo tempo — a gente <em>escuta</em>.</p>
+  </div>
+</section>
+
+<!-- ======= SEU SIGNO EM SINTONIA ======= -->
+<section class="signs-bridge">
+  <div class="container">
+    <div class="signs-bridge-grid">
+      <div>
+        <div class="section-label">Seu signo em sintonia</div>
+        <h2 class="signs-bridge-title">E pra <em>você</em>,<br>o que o céu reserva?</h2>
+      </div>
+      <div>
+        <p class="signs-bridge-body">Esses trânsitos tocam cada signo de um jeito diferente. Saturno em Áries pesa em algum lugar do seu mapa; <em>Júpiter em Câncer</em> abre outro. Escolha seu signo e leia o que está em movimento em 2026 — e como o Sintonia se encaixa nesse momento.</p>
+        <div class="signs-bridge-zodiac" aria-hidden="true">
+          <span>♈</span><span>♉</span><span>♊</span><span>♋</span><span>♌</span><span>♍</span><span>♎</span><span>♏</span><span>♐</span><span>♑</span><span>♒</span><span>♓</span>
+        </div>
+        <a href="2026.html" class="cta-primary">
+          Ler meu 2026
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 

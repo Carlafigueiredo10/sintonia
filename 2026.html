@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O que o céu reserva pra você em 2026 — Sintonia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sky-top: #e8c9a8;
+  --sky-high: #d4a589;
+  --sky-mid: #9a7670;
+  --sky-low: #4a4558;
+  --sky-base: #22243a;
+  --ink: #15162a;
+  --ink-soft: #2a2c45;
+  --ink-mute: #4a4d68;
+  --cream: #faf0dc;
+  --cream-dim: #e0d2ba;
+  --cream-mute: #a89e8a;
+  --line: rgba(21,22,42,0.2);
+  --line-soft: rgba(21,22,42,0.09);
+  --accent: #7a2a1a;
+  --accent-bright: #c4654a;
+  --serif: 'Fraunces', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  min-height:100vh;
+  font-family:var(--serif);
+  font-weight:300;
+  color:var(--ink);
+  overflow-x:hidden;
+  background:linear-gradient(
+    to bottom,
+    var(--sky-top) 0%,
+    var(--sky-high) 12%,
+    var(--sky-mid) 38%,
+    var(--sky-low) 70%,
+    var(--sky-base) 100%
+  );
+  background-attachment:fixed;
+}
+body::before {
+  content:""; position:fixed; inset:0;
+  pointer-events:none; opacity:0.05; z-index:100;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply;
+}
+
+.container { max-width:1080px; margin:0 auto; padding:0 2rem; }
+
+/* ── HEADER ── */
+header { padding:2rem 0; border-bottom:1px solid var(--line); }
+.header-grid {
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center; gap:2rem;
+}
+.mark {
+  font-family:var(--serif); font-weight:600; font-size:1.35rem;
+  letter-spacing:-0.02em; font-style:italic; color:var(--ink);
+  text-decoration:none;
+}
+.mark::after { content:"·"; color:var(--accent); margin-left:0.3rem; }
+.meta {
+  font-family:var(--mono); font-size:0.7rem;
+  letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--ink-soft); font-weight:500;
+}
+.meta-right { text-align:right; }
+
+/* ── HERO ── */
+.hero { padding:7rem 0 5rem; text-align:center; }
+
+.hero-kicker {
+  font-family:var(--mono); font-size:0.7rem;
+  letter-spacing:0.28em; text-transform:uppercase;
+  color:var(--accent); font-weight:500;
+  margin-bottom:2.25rem;
+  display:inline-flex; align-items:center; gap:0.75rem;
+  opacity:0; animation:fadeUp 0.8s ease 0.2s forwards;
+}
+.hero-kicker::before, .hero-kicker::after {
+  content:""; width:28px; height:1px; background:var(--accent);
+}
+
+.hero h1 {
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(3rem,8vw,7rem);
+  line-height:0.93; letter-spacing:-0.035em;
+  color:var(--ink);
+  font-variation-settings:"opsz" 144,"SOFT" 40;
+  margin-bottom:2rem;
+  opacity:0; animation:fadeUp 1s ease 0.35s forwards;
+}
+.hero h1 em {
+  font-style:italic; font-weight:500; color:var(--accent);
+  font-variation-settings:"opsz" 144,"SOFT" 100,"WONK" 1;
+}
+.hero h1 .yr {
+  font-style:normal; font-weight:400; color:var(--ink);
+  display:block;
+  font-size:0.72em; letter-spacing:-0.02em;
+  font-variation-settings:"opsz" 144,"SOFT" 20;
+}
+
+.hero-sub {
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(1.05rem,1.5vw,1.25rem);
+  line-height:1.6; color:var(--ink-soft);
+  max-width:46ch; margin:0 auto 1.5rem;
+  opacity:0; animation:fadeUp 1s ease 0.55s forwards;
+}
+
+.transits-strip {
+  display:inline-flex; gap:2rem; flex-wrap:wrap; justify-content:center;
+  margin-top:2.5rem;
+  opacity:0; animation:fadeUp 1s ease 0.75s forwards;
+}
+.transit-pill {
+  font-family:var(--mono); font-size:0.65rem;
+  letter-spacing:0.18em; text-transform:uppercase;
+  font-weight:500; color:var(--ink-mute);
+  border:1px solid var(--line); padding:0.5rem 1rem;
+  background:rgba(250,240,220,0.12);
+}
+.transit-pill span { color:var(--accent); margin-right:0.4rem; }
+
+/* ── PICKER ── */
+.picker-section { padding:3.5rem 0 5rem; }
+.picker-q {
+  font-family:var(--serif); font-style:italic;
+  font-weight:400; font-size:clamp(1.2rem,2vw,1.6rem);
+  line-height:1.4; color:var(--ink); letter-spacing:-0.01em;
+  text-align:center; margin-bottom:2.5rem;
+}
+
+.signs-grid {
+  display:grid; grid-template-columns:repeat(6,1fr);
+  gap:0; border:1px solid var(--line);
+  background:rgba(250,240,220,0.05);
+  backdrop-filter:blur(4px);
+  max-width:780px; margin:0 auto;
+}
+.sign-btn {
+  display:flex; flex-direction:column; align-items:center;
+  gap:0.45rem; padding:1.6rem 0.5rem;
+  border:none; border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:transparent; cursor:pointer;
+  transition:background 0.2s;
+}
+.sign-btn:nth-child(6n) { border-right:none; }
+.sign-btn:nth-child(n+7) { border-bottom:none; }
+.sign-btn:hover { background:rgba(250,240,220,0.15); }
+.sign-btn.active { background:var(--ink); }
+.sign-glyph {
+  font-size:1.6rem; line-height:1;
+  color:var(--ink); transition:color 0.2s;
+}
+.sign-btn.active .sign-glyph { color:var(--sky-top); }
+.sign-name {
+  font-family:var(--mono); font-size:0.6rem;
+  letter-spacing:0.16em; text-transform:uppercase;
+  font-weight:500; color:var(--ink-mute); transition:color 0.2s;
+}
+.sign-btn.active .sign-name { color:var(--accent-bright); }
+
+/* ── READING ── */
+.reading-wrap { padding:0 0 8rem; }
+
+.empty-hint {
+  text-align:center;
+  font-family:var(--serif); font-style:italic;
+  font-size:1.1rem; color:var(--ink-mute);
+  border:1px dashed var(--line);
+  padding:4rem 2rem;
+  max-width:780px; margin:0 auto;
+}
+.empty-hint.gone { display:none; }
+
+.reading-card {
+  max-width:780px; margin:0 auto;
+  opacity:0; transform:translateY(22px);
+  transition:opacity 0.5s ease, transform 0.5s ease;
+  display:none;
+}
+.reading-card.show { opacity:1; transform:translateY(0); display:block; }
+
+/* identity bar */
+.r-identity {
+  display:grid; grid-template-columns:auto 1fr;
+  gap:2.5rem; align-items:end;
+  padding-bottom:2.5rem;
+  border-bottom:1px solid var(--line);
+  margin-bottom:3rem;
+}
+.r-glyph {
+  font-size:4.5rem; line-height:1; color:var(--ink);
+}
+.r-titles {}
+.r-kicker {
+  font-family:var(--mono); font-size:0.66rem;
+  letter-spacing:0.24em; text-transform:uppercase;
+  color:var(--accent); font-weight:500; margin-bottom:0.6rem;
+}
+.r-name {
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(2.5rem,5vw,4rem);
+  line-height:0.95; letter-spacing:-0.03em;
+  color:var(--ink);
+  font-variation-settings:"opsz" 144,"SOFT" 40;
+  margin-bottom:0.4rem;
+}
+.r-tagline {
+  font-family:var(--serif); font-style:italic;
+  font-weight:400; font-size:1.15rem;
+  color:var(--accent); letter-spacing:-0.01em;
+}
+
+/* year badge */
+.r-year-badge {
+  display:inline-block;
+  font-family:var(--mono); font-size:0.62rem;
+  letter-spacing:0.2em; text-transform:uppercase;
+  font-weight:500; color:var(--cream-mute);
+  border:1px solid var(--line);
+  padding:0.35rem 0.9rem;
+  margin-bottom:1.75rem;
+  background:rgba(250,240,220,0.07);
+}
+
+/* reading text */
+.r-lede {
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(1.15rem,1.7vw,1.4rem);
+  line-height:1.52; letter-spacing:-0.01em;
+  color:var(--ink); margin-bottom:1.75rem;
+}
+.r-lede em { font-style:italic; font-weight:500; color:var(--accent); }
+
+.r-para {
+  font-family:var(--serif); font-weight:300;
+  font-size:1.08rem; line-height:1.7;
+  color:var(--ink-soft); margin-bottom:1.5rem;
+}
+.r-para em { font-style:italic; color:var(--ink); font-weight:400; }
+.r-para strong { font-weight:500; color:var(--ink); }
+
+/* divider quote */
+.r-quote {
+  margin:2.5rem 0;
+  padding:1.5rem 0 1.5rem 2rem;
+  border-left:2px solid var(--accent);
+  font-family:var(--serif); font-style:italic;
+  font-weight:400; font-size:1.2rem;
+  line-height:1.5; letter-spacing:-0.01em;
+  color:var(--ink);
+}
+
+/* sintonia bridge */
+.r-bridge {
+  margin-top:3rem;
+  padding:2.5rem;
+  border:1px solid var(--line);
+  background:rgba(250,240,220,0.1);
+}
+.r-bridge-label {
+  font-family:var(--mono); font-size:0.64rem;
+  letter-spacing:0.24em; text-transform:uppercase;
+  color:var(--accent); font-weight:500;
+  margin-bottom:1.25rem;
+  padding-bottom:1.25rem;
+  border-bottom:1px solid var(--line-soft);
+}
+.r-bridge-text {
+  font-family:var(--serif); font-weight:400;
+  font-size:1.08rem; line-height:1.65;
+  color:var(--ink); margin-bottom:1.5rem;
+}
+.r-bridge-text em { font-style:italic; font-weight:500; color:var(--accent); }
+
+.r-facts {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:0; margin-top:1.5rem;
+  border-top:1px solid var(--line-soft);
+}
+.rfact {
+  padding:1.25rem 1.25rem 1.25rem 0;
+  border-top:1px solid var(--line-soft);
+}
+.rfact:not(:first-child) { padding-left:1.25rem; border-left:1px solid var(--line-soft); }
+.rfact-label {
+  font-family:var(--mono); font-size:0.6rem;
+  letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--ink-mute); font-weight:500; margin-bottom:0.4rem;
+}
+.rfact-value {
+  font-family:var(--serif); font-weight:500;
+  font-size:0.98rem; line-height:1.3; color:var(--ink);
+  letter-spacing:-0.005em;
+}
+.rfact-value em { font-style:italic; color:var(--accent); }
+
+/* CTA */
+.r-cta {
+  margin-top:3rem; text-align:center;
+  padding-top:3rem; border-top:1px solid var(--line);
+}
+.r-cta-line {
+  font-family:var(--serif); font-style:italic;
+  font-size:1.15rem; font-weight:400;
+  color:var(--ink-soft); margin-bottom:2rem;
+  line-height:1.5; max-width:44ch; margin-left:auto; margin-right:auto;
+}
+.cta-primary {
+  display:inline-flex; align-items:center; gap:0.75rem;
+  background:var(--ink); color:var(--cream);
+  font-family:var(--mono); font-size:0.78rem;
+  font-weight:500; letter-spacing:0.18em;
+  text-transform:uppercase; padding:1.1rem 2rem;
+  text-decoration:none; border:1px solid var(--ink);
+  transition:all 0.3s ease; cursor:pointer;
+}
+.cta-primary:hover { background:var(--accent); border-color:var(--accent); }
+.cta-primary .arr { transition:transform 0.3s ease; }
+.cta-primary:hover .arr { transform:translateX(5px); }
+.cta-sub {
+  margin-top:1.25rem;
+  font-family:var(--mono); font-size:0.66rem;
+  letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-mute);
+}
+
+/* footer */
+footer { padding:3rem 0 2rem; border-top:1px solid rgba(250,240,220,0.1); }
+.footer-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  gap:2rem; align-items:end;
+}
+.footer-mark { font-family:var(--serif); font-style:italic; font-size:1rem; font-weight:500; color:var(--cream); }
+.footer-c { text-align:center; font-family:var(--mono); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(250,240,220,0.5); }
+.footer-r { text-align:right; font-family:var(--mono); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(250,240,220,0.5); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+@media (max-width:860px) {
+  .container { padding:0 1.25rem; }
+  .header-grid { grid-template-columns:1fr; text-align:center; gap:0.5rem; }
+  .meta-right { text-align:center; }
+  .hero { padding:4rem 0 3rem; }
+  .signs-grid { grid-template-columns:repeat(4,1fr); }
+  .sign-btn:nth-child(6n) { border-right:1px solid var(--line); }
+  .sign-btn:nth-child(4n) { border-right:none; }
+  .sign-btn:nth-child(n+7) { border-bottom:1px solid var(--line); }
+  .sign-btn:nth-child(n+9) { border-bottom:none; }
+  .r-identity { grid-template-columns:1fr; gap:1rem; }
+  .r-glyph { font-size:3rem; }
+  .r-bridge { padding:1.5rem; }
+  .r-facts { grid-template-columns:1fr; }
+  .rfact { padding:1rem 0 !important; border-left:none !important; border-bottom:1px solid var(--line-soft); }
+  .rfact:last-child { border-bottom:none; }
+  .footer-grid { grid-template-columns:1fr; text-align:center; gap:0.75rem; }
+  .footer-c, .footer-r { text-align:center; }
+}
+@media (max-width:520px) {
+  .signs-grid { grid-template-columns:repeat(3,1fr); }
+  .sign-btn:nth-child(4n) { border-right:1px solid var(--line); }
+  .sign-btn:nth-child(3n) { border-right:none; }
+  .sign-btn:nth-child(n+9) { border-bottom:1px solid var(--line); }
+  .sign-btn:nth-child(n+10) { border-bottom:none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-grid">
+      <div class="meta">Brasília · DF</div>
+      <a href="index.html" class="mark">Sintonia</a>
+      <div class="meta meta-right">2026</div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-kicker">Leitura de Temporada</div>
+    <h1>
+      O que o céu<br>
+      reserva pra <em>você</em><br>
+      <span class="yr">em 2026.</span>
+    </h1>
+    <p class="hero-sub">O ano tem trânsitos que mudam de verdade — Saturno em Áries, Urano em Gêmeos, Júpiter em Câncer. Escolha seu signo e entenda o que está em movimento no seu mapa.</p>
+    <div class="transits-strip">
+      <div class="transit-pill"><span>✦</span>Saturno em Áries</div>
+      <div class="transit-pill"><span>✦</span>Urano em Gêmeos</div>
+      <div class="transit-pill"><span>✦</span>Júpiter em Câncer</div>
+      <div class="transit-pill"><span>✦</span>Netuno em Áries</div>
+    </div>
+  </div>
+</section>
+
+<section class="picker-section">
+  <div class="container">
+    <p class="picker-q">Qual é o seu signo solar?</p>
+    <div class="signs-grid" role="group" aria-label="Signos do zodíaco">
+      <button class="sign-btn" data-sign="aries" aria-pressed="false">
+        <span class="sign-glyph">♈</span><span class="sign-name">Áries</span>
+      </button>
+      <button class="sign-btn" data-sign="touro" aria-pressed="false">
+        <span class="sign-glyph">♉</span><span class="sign-name">Touro</span>
+      </button>
+      <button class="sign-btn" data-sign="gemeos" aria-pressed="false">
+        <span class="sign-glyph">♊</span><span class="sign-name">Gêmeos</span>
+      </button>
+      <button class="sign-btn" data-sign="cancer" aria-pressed="false">
+        <span class="sign-glyph">♋</span><span class="sign-name">Câncer</span>
+      </button>
+      <button class="sign-btn" data-sign="leao" aria-pressed="false">
+        <span class="sign-glyph">♌</span><span class="sign-name">Leão</span>
+      </button>
+      <button class="sign-btn" data-sign="virgem" aria-pressed="false">
+        <span class="sign-glyph">♍</span><span class="sign-name">Virgem</span>
+      </button>
+      <button class="sign-btn" data-sign="libra" aria-pressed="false">
+        <span class="sign-glyph">♎</span><span class="sign-name">Libra</span>
+      </button>
+      <button class="sign-btn" data-sign="escorpiao" aria-pressed="false">
+        <span class="sign-glyph">♏</span><span class="sign-name">Escorpião</span>
+      </button>
+      <button class="sign-btn" data-sign="sagitario" aria-pressed="false">
+        <span class="sign-glyph">♐</span><span class="sign-name">Sagitário</span>
+      </button>
+      <button class="sign-btn" data-sign="capricornio" aria-pressed="false">
+        <span class="sign-glyph">♑</span><span class="sign-name">Capricórnio</span>
+      </button>
+      <button class="sign-btn" data-sign="aquario" aria-pressed="false">
+        <span class="sign-glyph">♒</span><span class="sign-name">Aquário</span>
+      </button>
+      <button class="sign-btn" data-sign="peixes" aria-pressed="false">
+        <span class="sign-glyph">♓</span><span class="sign-name">Peixes</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="reading-wrap">
+  <div class="container">
+    <div class="empty-hint" id="emptyHint">Escolha um signo acima para ver sua leitura de 2026.</div>
+
+    <div class="reading-card" id="readingCard">
+
+      <div class="r-identity">
+        <div class="r-glyph" id="rGlyph"></div>
+        <div class="r-titles">
+          <div class="r-kicker" id="rKicker"></div>
+          <div class="r-name" id="rName"></div>
+          <div class="r-tagline" id="rTagline"></div>
+        </div>
+      </div>
+
+      <div class="r-year-badge">Leitura 2026 · trânsitos em andamento</div>
+
+      <p class="r-lede" id="rLede"></p>
+      <p class="r-para" id="rPara1"></p>
+      <blockquote class="r-quote" id="rQuote"></blockquote>
+      <p class="r-para" id="rPara2"></p>
+
+      <div class="r-bridge">
+        <div class="r-bridge-label">Como o Sintonia se encaixa no seu 2026</div>
+        <p class="r-bridge-text" id="rBridge"></p>
+        <div class="r-facts">
+          <div class="rfact">
+            <div class="rfact-label">Momento</div>
+            <div class="rfact-value" id="rMomento"></div>
+          </div>
+          <div class="rfact">
+            <div class="rfact-label">Encontro ideal</div>
+            <div class="rfact-value" id="rFormato"></div>
+          </div>
+          <div class="rfact">
+            <div class="rfact-label">Trânsito ativo</div>
+            <div class="rfact-value" id="rTransito"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="r-cta">
+        <p class="r-cta-line" id="rCtaLine"></p>
+        <a href="index.html#lista" class="cta-primary">
+          Entrar na lista do Sintonia
+          <span class="arr">→</span>
+        </a>
+        <p class="cta-sub">Brasília · Vagas limitadas · Primeira temporada</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-mark">Sintonia</div>
+      <div class="footer-c">MMXXVI · Brasília</div>
+      <div class="footer-r">Em construção</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const data = {
+  aries: {
+    glyph:"♈", kicker:"Signo de Fogo · regido por Marte", name:"Áries",
+    tagline:"O ano em que a faísca encontra estrutura.",
+    lede:"2026 é um ano de <em>fundação</em> pra Áries. Saturno entrou no seu signo e Netuno também — uma combinação que acontece uma vez na vida. O que você começar agora tem peso.",
+    para1:"Saturno em Áries não é conforto — é construção com custo real. Você vai sentir o peso das escolhas que não fez, e a clareza das que está pronta pra fazer. O impulso ariano encontra estrutura: o fogo não some, ele ganha forma. Netuno na mesma faixa dissolve o que ainda é ilusão — a identidade que você mantinha por inércia começa a ser questionada por dentro.",
+    quote:"O que Áries constrói em 2026 vai durar. O desafio é construir devagar o suficiente pra construir bem.",
+    para2:"Júpiter em Câncer ativa sua área de casa e família, pedindo atenção às raízes. <em>Onde você pertence?</em> Com quem? Urano em Gêmeos movimenta a comunicação e os vínculos imediatos — espere conexões novas vindas de lugares inesperados, de pessoas que você nunca teria procurado.",
+    bridge:"Em 2026, Áries precisa de encontros que tenham <em>substância real</em> — não conversa de superfície, não rede de contatos. O Sintonia cria o contexto pra isso: grupo pequeno, tema com intenção, pessoas selecionadas por mapa, não por disponibilidade. O encontro certo com Saturno ativo é aquele que você vai lembrar em cinco anos.",
+    momento:"Lua Nova em Áries · março/abril",
+    formato:"Jantar de fundação",
+    transito:"Saturno + Netuno em Áries",
+    cta:"2026 não é o ano de mais eventos. É o ano do encontro certo."
+  },
+  touro: {
+    glyph:"♉", kicker:"Signo de Terra · regido por Vênus", name:"Touro",
+    tagline:"O ano em que o interior pede atenção.",
+    lede:"2026 é um ano de <em>recolhimento inteligente</em> pra Touro. Saturno e Netuno ativam sua área de espiritualidade, saúde e tudo que está nos bastidores da sua vida.",
+    para1:"Há algo que Touro tem carregado em silêncio — uma exaustão, um padrão, uma relação com o próprio corpo que pede revisão. Saturno nessa posição não é punição: é convite pra construir uma fundação interna mais honesta. O que te sustenta de verdade — e o que está te drenando sem que você perceba?",
+    quote:"Vênus, que rege Touro, vai pedir menos exibição e mais enraizamento em 2026. O prazer real, não o prazer performático.",
+    para2:"Júpiter em Câncer ilumina sua área de comunicação — palavras ganham mais peso, conversas têm mais alcance. <em>O que você está dizendo, e pra quem?</em> Urano em Gêmeos sacode seu campo financeiro e de valores — revise o que vale sua energia.",
+    bridge:"Em 2026, Touro precisa de encontros que <em>nutram sem exigir performance</em>. O Sintonia cria mesas onde você aparece sem currículo — só presença. O grupo pequeno, o ambiente cuidado, o tema que vai além da superfície: é o tipo de contexto que faz sentido quando você está num ciclo de aprofundamento.",
+    momento:"Vênus em Touro · abril/maio",
+    formato:"Mesa dos Sentidos",
+    transito:"Saturno na 12ª casa",
+    cta:"Às vezes o encontro certo não é o mais animado. É o que te lembra de si."
+  },
+  gemeos: {
+    glyph:"♊", kicker:"Signo de Ar · regido por Mercúrio", name:"Gêmeos",
+    tagline:"O ano em que o mundo muda de figura.",
+    lede:"2026 é um ano de <em>virada de perspectiva radical</em> pra Gêmeos. Urano entrou no seu signo — e quem tem Sol aqui vai sentir isso como uma espécie de renovação que não pediu permissão.",
+    para1:"Urano em Gêmeos reorganiza sua identidade. Não de fora pra dentro — de dentro pra fora. Crenças que você tinha sobre si mesmo começam a rachar. Conexões novas aparecem de lugares inesperados. O jeito como você se apresenta ao mundo vai mudar, e talvez seja alívio perceber que a versão antiga já não cabia direito.",
+    quote:"Em 2026, Gêmeos aprende a deixar uma história sobre si mesmo — e descobre que a nova é mais verdadeira.",
+    para2:"Saturno e Netuno em Áries ativam sua área de amizades e comunidade — quem faz parte do seu círculo vai ser revisto, não por drama, mas por crescimento real. <em>Júpiter em Câncer</em> aquece o campo financeiro: algo que você sabe fazer muito bem tem mais valor do que você cobrava.",
+    bridge:"Gêmeos em 2026 está em processo de <em>reinvenção de identidade</em> — e o encontro certo é aquele com pessoas que conheçam você só daqui pra frente. O Sintonia cria mesas onde você não precisa explicar quem era. Só aparecer como está sendo agora.",
+    momento:"Urano direto · começo do ano",
+    formato:"Roda de novos começos",
+    transito:"Urano em Gêmeos",
+    cta:"O encontro certo em 2026 é aquele que não conhece a versão antiga de você."
+  },
+  cancer: {
+    glyph:"♋", kicker:"Signo de Água · regido pela Lua", name:"Câncer",
+    tagline:"O ano em que expansão vem de dentro.",
+    lede:"2026 é um ano de <em>abundância emocional e profissional</em> pra Câncer. Júpiter entrou no seu signo — e isso é, por definição, um período de crescimento real.",
+    para1:"Júpiter em Câncer acontece uma vez a cada doze anos. É o momento em que o céu diz sim — às iniciativas, às trocas, aos vínculos que você vinha cultivando em silêncio. Mas Júpiter só funciona se você aparecer: a expansão não acontece por osmose, ela exige que você ocupe o espaço que está disponível.",
+    quote:"Em 2026, Câncer tem permissão cósmica de pedir mais — mais profundidade, mais cuidado, mais presença nas relações.",
+    para2:"Saturno e Netuno em Áries ativam sua área de carreira e reconhecimento público — estrutura e visibilidade andam juntas. Urano em Gêmeos movimenta os bastidores, a saúde, os processos internos. <em>O que estava oculto pode vir à tona com valor.</em>",
+    bridge:"Câncer com Júpiter ativo precisa de encontros à altura do momento — <em>pessoas que estejam prontas pra conexão real</em>, não networking de superfície. O Sintonia cuida disso: sinastria, grupo pequeno, tema com profundidade. Você vai chegar e reconhecer que as pessoas ao redor estão num momento parecido com o seu.",
+    momento:"Júpiter em Câncer · o ano inteiro",
+    formato:"Jantar íntimo de expansão",
+    transito:"Júpiter em Câncer",
+    cta:"Júpiter em Câncer não dura pra sempre. 2026 é o momento de aparecer."
+  },
+  leao: {
+    glyph:"♌", kicker:"Signo de Fogo · regido pelo Sol", name:"Leão",
+    tagline:"O ano em que a base importa mais que o brilho.",
+    lede:"2026 é um ano de <em>revisão de valores e construção de futuro</em> pra Leão. O céu não está te pedindo menos — está te pedindo mais intenção sobre onde você coloca sua energia.",
+    para1:"Saturno e Netuno em Áries ativam sua área de aprendizado, filosofia e expansão de mundo. Há algo que você quer entender mais fundo — um campo de conhecimento, uma crença que nunca testou, uma perspectiva que ficou esperando. Em 2026, o investimento intelectual e existencial tem retorno real.",
+    quote:"Leão em 2026 descobre que o brilho mais duradouro vem de ter algo substancial pra dizer — não só de ocupar bem o espaço.",
+    para2:"Júpiter em Câncer aquece sua área de coisas ocultas, processos internos e transformação — algo que estava guardado pede pra ser integrado. <em>Urano em Gêmeos</em> mexe com amizades e comunidade: quem está no seu círculo pode surpreender, e quem você vai encontrar em 2026 pode não se parecer com quem você esperava.",
+    bridge:"Em 2026, Leão está num ciclo de <em>aprofundamento</em> — e o encontro certo não é o maior, é o mais denso. O Sintonia cria grupos onde a conversa tem substância desde o começo: tema pensado, mapas selecionados, presença real. Sem plateia, sem palco — só mesa.",
+    momento:"Sol em Leão · julho/agosto",
+    formato:"Jantar de ideias",
+    transito:"Saturno na 9ª casa",
+    cta:"2026 pede que Leão seja mais do que presença — seja profundidade. O encontro certo ajuda com isso."
+  },
+  virgem: {
+    glyph:"♍", kicker:"Signo de Terra · regido por Mercúrio", name:"Virgem",
+    tagline:"O ano em que a entrega pede reciprocidade.",
+    lede:"2026 é um ano de <em>transformação nas relações mais profundas</em> pra Virgem. Saturno e Netuno em Áries ativam sua área de intimidade, recursos compartilhados e vínculos que exigem confiança real.",
+    para1:"Você sabe cuidar. Sabe reparar, organizar, estar presente de forma prática quando alguém precisa. Mas em 2026 o céu pergunta: quem cuida de você? Saturno nessa posição pede que você revise quais vínculos têm reciprocidade de verdade — e quais existem só porque você continua sustentando.",
+    quote:"Virgem em 2026 aprende que receber não é fraqueza. É o outro lado do ciclo.",
+    para2:"Júpiter em Câncer ilumina sua área de amizades e comunidade — círculos novos, pessoas novas, um senso renovado de pertencimento. <em>Urano em Gêmeos</em> reorganiza sua área profissional: o modo como você trabalha e contribui vai mudar, provavelmente pra melhor.",
+    bridge:"Virgem em 2026 precisa de encontros onde <em>não precise gerir nada</em> — onde chegue e seja cuidada pelo contexto. O Sintonia resolve isso: ambiente pensado, pessoas curadas, tema com propósito. Você só aparece. Pela primeira vez no dia, talvez, você não seja quem está resolvendo.",
+    momento:"Mercúrio direto · início do ano",
+    formato:"Oficina temática",
+    transito:"Saturno na 8ª casa",
+    cta:"O encontro certo pra Virgem em 2026 é aquele em que você recebe, não organiza."
+  },
+  libra: {
+    glyph:"♎", kicker:"Signo de Ar · regido por Vênus", name:"Libra",
+    tagline:"O ano em que as relações encontram sua forma real.",
+    lede:"2026 é um ano de <em>clareza relacional</em> pra Libra. Saturno e Netuno estão ativando sua área de relações — e isso significa que ilusões sobre vínculos vão cair, enquanto o que é real vai ficar mais sólido.",
+    para1:"Libra vive pelas relações — mas em 2026 o céu pede honestidade sobre quais relações são de verdade. Saturno exige estrutura e compromisso; Netuno dissolve o que era só aparência de harmonia. Pode doer um pouco. Mas o que sobrar vai ser confiável.",
+    quote:"Em 2026, Libra descobre que equilíbrio real não é ausência de tensão — é tensão honesta, sustentada por cuidado mútuo.",
+    para2:"Júpiter em Câncer ilumina carreira e reconhecimento — algo que você vinha construindo começa a ganhar visibilidade. <em>Urano em Gêmeos</em> ativa expansão de mundo: ideias novas, estudos novos, perspectivas que você não considerava chegam sem aviso.",
+    bridge:"Em 2026, Libra precisa de encontros onde a <em>harmonia seja genuína, não construída por esforço social</em>. O Sintonia usa sinastria pra selecionar pessoas com compatibilidade real — não só boa educação. Você vai sentir a diferença no segundo prato: a conversa vai fundo sem que ninguém tenha puxado.",
+    momento:"Vênus em Libra · setembro",
+    formato:"Mesa de afinidades",
+    transito:"Saturno na 7ª casa",
+    cta:"O encontro certo em 2026 não é o mais educado. É o mais real."
+  },
+  escorpiao: {
+    glyph:"♏", kicker:"Signo de Água · regido por Plutão", name:"Escorpião",
+    tagline:"O ano em que o cotidiano se transforma.",
+    lede:"2026 é um ano de <em>transformação nos hábitos e nas parcerias</em> pra Escorpião. Saturno e Netuno em Áries ativam sua área de rotina, saúde e trabalho — estruturar o cotidiano nunca foi tão urgente.",
+    para1:"Escorpião tem profundidade de sobra — o que às vezes falta é sustentação nos detalhes do dia a dia. Em 2026, Saturno pede que essa profundidade encontre ritmo: um hábito sustentável, uma entrega mais consistente, uma saúde que não seja negligenciada por intensidade.",
+    quote:"Escorpião em 2026 descobre que a transformação mais poderosa não é a dramática — é a que acontece toda manhã.",
+    para2:"Júpiter em Câncer ativa sua área de expansão de mundo, filosofia e viagem — <em>algo cresce no que você acredita</em>. Urano em Gêmeos reorganiza recursos compartilhados e vínculos de confiança: o que vale pra você, e com quem você está disposta a dividir?",
+    bridge:"Em 2026, Escorpião precisa de encontros que tenham <em>densidade sem drama</em> — profundidade acessível, não performance de intensidade. O Sintonia cria o contexto: tema com intenção, grupo pequeno, sinastria que busca quem consegue ir fundo. Você vai chegar e perceber que não precisa se conter.",
+    momento:"Lua Nova em Escorpião · outubro",
+    formato:"Roda noturna",
+    transito:"Saturno na 6ª casa",
+    cta:"O encontro certo pra Escorpião é aquele em que ninguém precisa fingir que está bem."
+  },
+  sagitario: {
+    glyph:"♐", kicker:"Signo de Fogo · regido por Júpiter", name:"Sagitário",
+    tagline:"O ano em que criar vira urgência.",
+    lede:"2026 é um ano de <em>expressão criativa e abertura do coração</em> pra Sagitário. Saturno e Netuno em Áries ativam sua área de criação, romance e tudo que você faz por amor — não por obrigação.",
+    para1:"Há algo que Sagitário quer criar — uma ideia, um projeto, uma expressão — e que ficou esperando o momento certo. Em 2026, o momento é agora. Saturno pede comprometimento real com a criação; Netuno dissolve o que você ainda estava fazendo só por aparecer bem.",
+    quote:"Sagitário em 2026 descobre que expansão de mundo e expansão interna não são opostas. São o mesmo movimento.",
+    para2:"Júpiter em Câncer ativa sua área de recursos e valores — <em>o que você investe começa a retornar</em>. Urano em Gêmeos reorganiza parcerias próximas: quem está ao seu lado vai surpreender, ou vai mudar.",
+    bridge:"Sagitário em 2026 está num ciclo de <em>criação e entrega</em> — e o encontro certo é aquele que alimenta, não drena. O Sintonia cria contextos onde ideias nascem da troca, onde você sai inspirado porque as pessoas ao redor têm algo real pra oferecer. Não só mais uma festa.",
+    momento:"Júpiter em aspecto favorável",
+    formato:"Jantar de ideias",
+    transito:"Saturno na 5ª casa",
+    cta:"2026 pede que Sagitário coloque algo concreto no mundo. O encontro certo ajuda a saber o quê."
+  },
+  capricornio: {
+    glyph:"♑", kicker:"Signo de Terra · regido por Saturno", name:"Capricórnio",
+    tagline:"O ano em que o lar encontra sua forma.",
+    lede:"2026 é um ano de <em>fundação afetiva e familiar</em> pra Capricórnio. Saturno e Netuno em Áries ativam sua área de lar, raízes e pertencimento — o que você chama de casa vai ser redefinido.",
+    para1:"Capricórnio é regido por Saturno — então quando Saturno se movimenta, você sente na carne. Em 2026, a área afetada é o que sustenta tudo por baixo: família de origem, família escolhida, o lugar físico e simbólico onde você se recarrega. O que ainda está de pé por inércia começa a pedir decisão.",
+    quote:"Em 2026, Capricórnio aprende que construir um lar não é um projeto paralelo à vida — é a fundação dela.",
+    para2:"Júpiter em Câncer — seu signo oposto — ativa o campo das parcerias com abundância. <em>Relações que têm base real crescem</em>. Urano em Gêmeos reorganiza saúde e rotina: pequenas mudanças de hábito têm efeito desproporcional.",
+    bridge:"Em 2026, Capricórnio precisa de encontros que criem <em>senso de pertencimento sem exigir performance</em>. O Sintonia faz isso: grupo pequeno, curadoria cuidadosa, tema que importa. Você vai chegar, sentar, e perceber que ali é um tipo de lar temporário — e que isso tem valor.",
+    momento:"Saturno em aspecto · construção",
+    formato:"Jantar de fundação",
+    transito:"Saturno na 4ª casa",
+    cta:"O encontro certo pra Capricórnio em 2026 é o que parece, desde o início, algo sólido."
+  },
+  aquario: {
+    glyph:"♒", kicker:"Signo de Ar · regido por Urano", name:"Aquário",
+    tagline:"O ano em que as palavras encontram seu peso.",
+    lede:"2026 é um ano de <em>inovação na comunicação e nos vínculos próximos</em> pra Aquário. Urano em Gêmeos ativa diretamente sua área de expressão — e isso significa que sua forma de se conectar vai mudar de figura.",
+    para1:"Urano rege Aquário — então quando Urano se move, você sente como liberação, não como ruptura. Em 2026, a área de comunicação, aprendizado e conexões cotidianas está sendo reinventada. A forma como você pensa, fala e escreve vai ganhar um sotaque novo. <em>Deixa.</em>",
+    quote:"Aquário em 2026 descobre que inovar não é só uma ideia — é uma forma de se relacionar.",
+    para2:"Saturno e Netuno em Áries ativam sua área de dinheiro e valores — a relação com o que você possui e o que você quer construir materialmente pede revisão honesta. Júpiter em Câncer ilumina saúde e rotina: <em>pequenos rituais têm retorno grande</em> este ano.",
+    bridge:"Aquário em 2026 está num ciclo de <em>renovação da forma de se conectar</em> — e o encontro certo é aquele com pessoas que você não encontraria por rotas convencionais. O Sintonia foi desenhado pra isso: curadoria de mapa, não de perfil. Você vai sentar com alguém que pensa diferente de você — e que ainda assim ressoa.",
+    momento:"Urano direto · fevereiro",
+    formato:"Roda de perspectivas",
+    transito:"Urano em Gêmeos",
+    cta:"Em 2026, Aquário encontra pessoas que não esperava encontrar. O Sintonia cuida de criar o contexto pra isso."
+  },
+  peixes: {
+    glyph:"♓", kicker:"Signo de Água · regido por Netuno", name:"Peixes",
+    tagline:"O ano em que identidade e sonho se reorganizam.",
+    lede:"2026 é um ano de <em>transição profunda de identidade</em> pra Peixes. Netuno — seu regente — saiu do seu signo e entrou em Áries. Algo que foi sua casa por mais de uma década acabou de mudar de endereço.",
+    para1:"Peixes com Netuno em Áries sente como se a névoa tivesse levantado — um pouco de clareza que, paradoxalmente, pode ser desorientante. Quem você é sem a dissolução como modo padrão? Há uma identidade mais afirmativa esperando ser habitada. Saturno em Áries ajuda: estrutura onde antes havia só sonho.",
+    quote:"Peixes em 2026 descobre o que quer — não só o que sente. E isso muda tudo.",
+    para2:"Júpiter em Câncer ativa sua área de criação, romance e expressão — <em>algo que vinha sendo contido vai encontrar saída</em>. Urano em Gêmeos reorganiza suas parcerias próximas: quem está ao seu lado está sendo colocado em perspectiva de uma forma saudável.",
+    bridge:"Peixes em 2026 está aprendendo a <em>querer de forma mais direcionada</em> — e o encontro certo é aquele em que presença consciente é possível, não só presença emocional. O Sintonia cria campo pra isso: ambiente cuidado, tema com intenção, pessoas selecionadas por compatibilidade real. Você vai poder estar inteiro.",
+    momento:"Lua Cheia em Peixes · fevereiro",
+    formato:"Jantar contemplativo",
+    transito:"Netuno em Áries · nova fase",
+    cta:"2026 é o primeiro ano de uma nova fase pra Peixes. O encontro certo faz parte disso."
+  }
+};
+
+const btns = document.querySelectorAll('.sign-btn');
+const card = document.getElementById('readingCard');
+const hint = document.getElementById('emptyHint');
+
+function fill(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+
+function show(sign) {
+  const d = data[sign];
+  if (!d) return;
+  fill('rGlyph', d.glyph);
+  fill('rKicker', d.kicker);
+  fill('rName', d.name);
+  fill('rTagline', d.tagline);
+  fill('rLede', d.lede);
+  fill('rPara1', d.para1);
+  fill('rQuote', d.quote);
+  fill('rPara2', d.para2);
+  fill('rBridge', d.bridge);
+  fill('rMomento', d.momento);
+  fill('rFormato', d.formato);
+  fill('rTransito', d.transito);
+  fill('rCtaLine', d.cta);
+
+  hint.classList.add('gone');
+  card.classList.remove('show');
+  void card.offsetWidth;
+  card.classList.add('show');
+  setTimeout(() => card.scrollIntoView({ behavior:'smooth', block:'start' }), 80);
+}
+
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed','true');
+    show(btn.dataset.sign);
+  });
+});
+</script>
+</body>
+</html>
