@@ -152,23 +152,75 @@
   }
 
   .error.visible { display: block; }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    align-items: center;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .login-form input {
+    width: 100%;
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--ink);
+    background: rgba(250, 240, 220, 0.45);
+    border: 1px solid rgba(21, 22, 42, 0.25);
+    padding: 0.95rem 1.1rem;
+    outline: none;
+    transition: border-color 0.25s ease, background 0.25s ease;
+  }
+
+  .login-form input::placeholder {
+    color: rgba(21, 22, 42, 0.45);
+    font-style: italic;
+  }
+
+  .login-form input:focus {
+    border-color: var(--ink);
+    background: rgba(250, 240, 220, 0.7);
+  }
+
+  .login-form input:disabled {
+    opacity: 0.55;
+    cursor: progress;
+  }
+
+  .login-form .google-btn { margin-top: 0.5rem; }
 </style>
 </head>
 <body>
   <div class="card">
     <div class="mark">Sintonia</div>
     <h1>Bem-vinda <em>de volta</em>.</h1>
-    <p class="sub">Acesso restrito ao time. Entre com sua conta Google.</p>
+    <p class="sub">Acesso restrito ao time. Entre com seu email e senha.</p>
 
-    <button class="google-btn" id="googleBtn" type="button">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A10.99 10.99 0 0 0 12 23z" fill="#34A853"/>
-        <path d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.07H2.18A10.99 10.99 0 0 0 1 12c0 1.77.43 3.45 1.18 4.93l3.66-2.83z" fill="#FBBC05"/>
-        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.83C6.71 7.31 9.14 5.38 12 5.38z" fill="#EA4335"/>
-      </svg>
-      <span id="googleBtnLabel">Entrar com Google</span>
-    </button>
+    <form id="loginForm" class="login-form" novalidate>
+      <label class="visually-hidden" for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="email" autocomplete="username" required>
+
+      <label class="visually-hidden" for="password">Senha</label>
+      <input type="password" id="password" name="password" placeholder="senha" autocomplete="current-password" required>
+
+      <button class="google-btn" id="submitBtn" type="submit">
+        <span id="submitLabel">Entrar</span>
+      </button>
+    </form>
 
     <div class="error" id="errorMsg" role="alert"></div>
 
@@ -184,8 +236,11 @@
     const SUPABASE_KEY = 'sb_publishable_9JmoCSyrmfCqLB_ThbfWFQ_GGu3EuDe';
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    const btn = document.getElementById('googleBtn');
-    const btnLabel = document.getElementById('googleBtnLabel');
+    const form = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const btn = document.getElementById('submitBtn');
+    const btnLabel = document.getElementById('submitLabel');
     const errorEl = document.getElementById('errorMsg');
 
     const { data: { session } } = await supabase.auth.getSession();
@@ -193,23 +248,44 @@
       window.location.replace('interessadas.html');
     }
 
-    btn.addEventListener('click', async () => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
       errorEl.classList.remove('visible');
+
+      const email = emailInput.value.trim().toLowerCase();
+      const password = passwordInput.value;
+
+      if (!email || !password) {
+        errorEl.textContent = 'Preenche email e senha.';
+        errorEl.classList.add('visible');
+        return;
+      }
+
       btn.disabled = true;
-      btnLabel.textContent = 'Abrindo Google…';
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}/interessadas.html`,
-        },
-      });
+      emailInput.disabled = true;
+      passwordInput.disabled = true;
+      btnLabel.textContent = 'Entrando…';
+
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+
       if (error) {
-        console.error('OAuth error', error);
-        errorEl.textContent = 'Falha ao abrir login. Tenta de novo.';
+        console.error('Sign-in error', error);
+        if (error.message && /invalid login credentials/i.test(error.message)) {
+          errorEl.textContent = 'Email ou senha não conferem.';
+        } else if (error.message && /email not confirmed/i.test(error.message)) {
+          errorEl.textContent = 'Esse email ainda não foi confirmado.';
+        } else {
+          errorEl.textContent = 'Algo deu errado. Tenta de novo em um instante.';
+        }
         errorEl.classList.add('visible');
         btn.disabled = false;
-        btnLabel.textContent = 'Entrar com Google';
+        emailInput.disabled = false;
+        passwordInput.disabled = false;
+        btnLabel.textContent = 'Entrar';
+        return;
       }
+
+      window.location.replace('interessadas.html');
     });
   </script>
 </body>

@@ -1,0 +1,16 @@
+{
+  "name": "sintonia-forecast",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "forecast": "node send-forecast.js",
+    "build-icons": "node scripts/build-icons.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
+}
