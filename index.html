@@ -14,7 +14,8 @@
 <title>Sintonia — Encontros no tempo certo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,700;9..144,900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,700;9..144,900&family=JetBrains+Mono:wght@300;400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,700;9..144,900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     /* Crepúsculo calibrado — mais saturação nas extremidades, meios-tons suaves pra legibilidade */
@@ -1643,11 +1644,11 @@
     display: block;
     pointer-events: none;
   }
-  .intro-scene #intro-stars { z-index: 1; opacity: 0; animation: introFadeIn 4.5s var(--i-ease) .3s forwards; }
+  .intro-scene #intro-stars { z-index: 1; opacity: 0; animation: introFadeIn 1.8s var(--i-ease) .12s forwards; }
   .intro-scene #intro-fog   { z-index: 2; opacity: 0; mix-blend-mode: screen;
-                              animation: introFadeIn 7s var(--i-ease) .6s forwards; }
+                              animation: introFadeIn 2.5s var(--i-ease) .24s forwards; }
   .intro-scene #intro-dust  { z-index: 6; opacity: 0; mix-blend-mode: screen;
-                              animation: introFadeIn 5s var(--i-ease) 2.0s forwards; }
+                              animation: introFadeIn 2s var(--i-ease) .8s forwards; }
 
   .intro-cosmos {
     position: absolute;
@@ -1665,7 +1666,7 @@
         rgba(90,72,104,.14) 0%, rgba(90,72,104,.05) 35%, rgba(0,0,0,0) 70%);
     filter: blur(22px);
     opacity: 0;
-    animation: introFadeIn 6s var(--i-ease) 1.2s forwards, introDrift 60s linear infinite;
+    animation: introFadeIn 2.5s var(--i-ease) .5s forwards, introDrift 60s linear infinite;
   }
 
   .intro-carto {
@@ -1687,7 +1688,7 @@
     opacity: .48;
     stroke-dasharray: var(--len);
     stroke-dashoffset: var(--len);
-    animation: introDraw var(--dur) var(--i-ease-slow) var(--delay) forwards;
+    animation: introDraw calc(var(--dur) * .4) var(--i-ease-slow) calc(var(--delay) * .4) forwards;
   }
   .intro-carto .secondary { stroke: var(--i-gold); opacity: .30; stroke-width: .4; }
   .intro-carto .tertiary  { stroke: var(--i-rose); opacity: .18; stroke-width: .4; }
@@ -1696,21 +1697,21 @@
     stroke: none;
     opacity: 0;
     filter: drop-shadow(0 0 2px var(--i-gold));
-    animation: introNodeOn .9s var(--i-ease) var(--delay) forwards;
+    animation: introNodeOn .45s var(--i-ease) calc(var(--delay) * .4) forwards;
   }
   .intro-carto .ring {
     fill: none;
     stroke: var(--i-ivory-dim);
     stroke-width: .4;
     opacity: 0;
-    animation: introNodeOn 1.2s var(--i-ease) calc(var(--delay) + .1s) forwards,
-               introRingPulse 5s var(--i-ease) calc(var(--delay) + .8s) infinite;
+    animation: introNodeOn .6s var(--i-ease) calc(var(--delay) * .4 + .05s) forwards,
+               introRingPulse 5s var(--i-ease) calc(var(--delay) * .4 + .3s) infinite;
   }
   .intro-carto .crosshair {
     stroke: var(--i-ivory-dim);
     stroke-width: .35;
     opacity: 0;
-    animation: introNodeOn 1s var(--i-ease) var(--delay) forwards;
+    animation: introNodeOn .5s var(--i-ease) calc(var(--delay) * .4) forwards;
   }
 
   .intro-title-wrap {
@@ -1734,7 +1735,7 @@
     text-transform: uppercase;
     opacity: 0;
     transform: translateY(8px);
-    animation: introTitleIn 3.8s var(--i-ease-slow) 5.0s forwards;
+    animation: introTitleIn 1.6s var(--i-ease-slow) .6s forwards;
     text-shadow:
       0 0 1px rgba(244,212,168,.95),
       0 0 14px rgba(244,212,168,.45),
@@ -1767,7 +1768,7 @@
       rgba(212,130,58,0) 80%);
     mix-blend-mode: screen;
     opacity: 0;
-    animation: introFadeIn 6s var(--i-ease) 5s forwards;
+    animation: introFadeIn 2.5s var(--i-ease) 1.2s forwards;
   }
 
   .intro-edges {
@@ -1785,7 +1786,7 @@
     height: 1px;
     background: linear-gradient(to right, transparent, rgba(244,212,168,.20), transparent);
     opacity: 0;
-    animation: introFadeIn 3s var(--i-ease) 1s forwards;
+    animation: introFadeIn 1.2s var(--i-ease) .4s forwards;
   }
   .intro-edges::before { top: 7%; }
   .intro-edges::after  { bottom: 7%; }
@@ -1865,6 +1866,15 @@
     .intro-scene *::after {
       animation-duration: .001s !important;
       animation-delay: 0s !important;
+    }
+  }
+
+  /* Mobile: cartografia inteira visível como banda centralizada verticalmente */
+  @media (max-width: 720px) {
+    .intro-carto {
+      top: calc(50vh - 28.125vw);  /* (100vh - largura×9/16) / 2 = centro vertical */
+      bottom: auto;
+      height: auto;                 /* aspecto vem do viewBox 1920×1080 */
     }
   }
 </style>
